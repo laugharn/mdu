@@ -1,5 +1,6 @@
 const path = require('path');
 const withCSS = require('@zeit/next-css');
+const withFonts = require('next-fonts');
 const withPurgeCSS = require('next-purgecss');
 
 class TailwindExtractor {
@@ -10,6 +11,9 @@ class TailwindExtractor {
 
 const config = {
   dev: process.env.NODE_ENV !== 'production',
+  env: {
+    SITE_TITLE: 'Pecan Real Estate'
+  },
   purgeCss: {
     extractors: [
       {
@@ -26,6 +30,6 @@ const config = {
   }
 };
 
-module.exports = withCSS(
+module.exports = withFonts(withCSS(
   process.env.NODE_ENV == 'production' ? withPurgeCSS(config) : config
-);
+));

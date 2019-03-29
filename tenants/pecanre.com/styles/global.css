@@ -1,2 +1,22 @@
 @tailwind base;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'Graphik';
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: normal;
+  src: url('../fonts/Graphik-Regular-Web.woff');
+}
+
+@font-face {
+  font-family: 'Graphik';
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: bold;
+  src: url('../fonts/Graphik-Medium-Web.woff');
+}
+
+body {
+  @apply .font-sans;
+}

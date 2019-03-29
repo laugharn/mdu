@@ -4,11 +4,15 @@ A move-in ready monorepo.
 
 ## Installation
 
-The only prerequisite is Yarn. Once you have that, run `yarn` to install dependencies, and `yarn pecanre.com` to run the pecanre.com dev server on port 3000.
+The only prerequisite is Yarn. Once you have that, run `yarn` to install dependencies, and `yarn pecanre.com` to run the pecanre.com dev server on port 9000.
 
 ## MDU
 
-MDU leverages Yarn Workspaces to allow for simple, co-located packages. This pays off the most when you are building shared packages.
+MDU offers the following features:
+
+* Yarn Workspaces
+* ESLint
+* Prettier
 
 ## Tenants
 

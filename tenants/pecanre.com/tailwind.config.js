@@ -149,6 +149,7 @@ module.exports = {
       },
       fontFamily: {
         sans: [
+          'Graphik',
           '-apple-system',
           'BlinkMacSystemFont',
           '"Segoe UI"',

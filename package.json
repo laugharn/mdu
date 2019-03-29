@@ -2,7 +2,7 @@
     "name": "home",
     "private": true,
     "scripts": {
-        "pecanre.com": "cd tenants/pecanre.com && next"
+        "pecanre.com": "cd tenants/pecanre.com && next -p 9000"
     },
     "version": "0.0.0",
     "workspaces": [

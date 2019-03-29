@@ -1,11 +1,13 @@
-import "../styles/global.css";
+import '../styles/global.css';
 
-import App, { Container } from "next/app";
-import AuthContainer from "~/containers/auth";
+import App, { Container } from 'next/app';
+import AuthContainer from '~/containers/auth';
+import Head from '~/components/seo/head';
 
 const Pecan = ({ Component, pageProps }) => {
   return (
     <Container>
+      <Head />
       <AuthContainer.Provider>
         <Component {...pageProps} />
       </AuthContainer.Provider>
