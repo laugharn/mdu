@@ -1,0 +1,9 @@
+{
+    "name": "home",
+    "private": true,
+    "scripts": {
+        "pecanre.com": "cd packages/pecanre.com && next"
+    },
+    "version": "0.0.0",
+    "workspaces": ["packages/*"]
+}
