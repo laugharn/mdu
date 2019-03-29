@@ -2,8 +2,16 @@
     "name": "home",
     "private": true,
     "scripts": {
-        "pecanre.com": "cd packages/pecanre.com && next"
+        "pecanre.com": "cd tenants/pecanre.com && next"
     },
     "version": "0.0.0",
-    "workspaces": ["packages/*"]
+    "workspaces": [
+        "tenants/*"
+    ],
+    "devDependencies": {
+        "eslint": "^5.15.3",
+        "eslint-config-prettier": "^4.1.0",
+        "eslint-plugin-prettier": "^3.0.1",
+        "prettier": "^1.16.4"
+    }
 }

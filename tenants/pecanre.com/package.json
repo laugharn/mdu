@@ -6,7 +6,8 @@
         "constate": "^1.0.0",
         "next": "^8.0.3",
         "react": "^16.8.6",
-        "react-dom": "^16.8.6"
+        "react-dom": "^16.8.6",
+        "validate.js": "^0.12.0"
     },
     "devDependencies": {
         "@zeit/next-css": "^1.0.1",
