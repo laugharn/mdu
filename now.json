@@ -2,6 +2,7 @@
   "alias": "pecanre.this.sh",
   "builds": [{ "src": "tenants/pecanre.com/package.json", "use": "@now/next" }],
   "name": "mdu",
+  "regions": ["iad1"],
   "routes": [
     {
       "src": "/(.*)",
