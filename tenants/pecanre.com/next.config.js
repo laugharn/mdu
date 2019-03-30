@@ -2,6 +2,7 @@ const path = require('path');
 const withCSS = require('@zeit/next-css');
 const withFonts = require('next-fonts');
 const withPurgeCSS = require('next-purgecss');
+const withTM = require('next-transpile-modules');
 
 class TailwindExtractor {
   static extract(content) {
@@ -26,12 +27,13 @@ const config = {
     whitelist: ['body', 'html']
   },
   target: 'serverless',
+  transpileModules: ['shared'],
   webpack(config, options) {
     config.resolve.alias['~'] = path.join(__dirname, '');
     return config;
   }
 };
 
-module.exports = withFonts(withCSS(
+module.exports = withTM(withFonts(withCSS(
   process.env.NODE_ENV == 'production' ? withPurgeCSS(config) : config
-));
+)));
