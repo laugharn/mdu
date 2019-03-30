@@ -1,10 +1,17 @@
-import '../styles/global.css';
+import '../styles/global.css'
 
-import App, { Container } from 'next/app';
-import AuthContainer from '~/containers/auth';
-import Head from '~/components/seo/head';
+import App, { Container } from 'next/app'
+import AuthContainer from '~/containers/auth'
+import Head from '~/components/seo/head'
+import useHotkeys from '~/utils/hooks/useHotkeys'
 
 const Pecan = ({ Component, pageProps }) => {
+  useHotkeys('alt+q+a', () => {
+    if (process.env.BRANCH !== 'master') {
+      alert('Entering QA debug mode!')
+    }
+  })
+
   return (
     <Container>
       <Head />
@@ -12,15 +19,15 @@ const Pecan = ({ Component, pageProps }) => {
         <Component {...pageProps} />
       </AuthContainer.Provider>
     </Container>
-  );
-};
+  )
+}
 
 Pecan.getInitialProps = async context => {
-  const props = await App.getInitialProps(context);
+  const props = await App.getInitialProps(context)
 
   return {
-    ...props
-  };
-};
+    ...props,
+  }
+}
 
-export default Pecan;
+export default Pecan

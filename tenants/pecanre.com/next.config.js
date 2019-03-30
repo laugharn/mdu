@@ -12,7 +12,7 @@ class TailwindExtractor {
 const config = {
   dev: process.env.NODE_ENV !== 'production',
   env: {
-    NOW_GITHUB_COMMIT_REF: process.env.NOW_GITHUB_COMMIT_REF,
+    BRANCH: process.env.NOW_GITHUB_COMMIT_REF,
     SITE_TITLE: 'Pecan Real Estate'
   },
   purgeCss: {
