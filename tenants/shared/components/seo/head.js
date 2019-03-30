@@ -1,4 +1,4 @@
-import Head from 'next/head';
+import Head from 'next/head'
 import Title from './title'
 
 export default ({ children }) => (
@@ -17,4 +17,4 @@ export default ({ children }) => (
 
     {children}
   </Head>
-);
+)
