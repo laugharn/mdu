@@ -1,13 +1,13 @@
-import createContainer from "constate";
-import { useState } from "react";
+import createContainer from 'constate'
+import { useState } from 'react'
 
 const useAuth = () => {
-  const [authState, setAuthState] = useState({});
-  const set = value => setAuthState(value);
+  const [authState, setAuthState] = useState({})
+  const set = value => setAuthState(value)
 
-  return { authState, set };
-};
+  return { authState, set }
+}
 
-const AuthContainer = createContainer(useAuth);
+const AuthContainer = createContainer(useAuth)
 
-export default AuthContainer;
+export default AuthContainer

@@ -1,9 +1,9 @@
-import '../styles/global.css'
+import 'shared/styles/global.css'
 
 import App, { Container } from 'next/app'
 import AuthContainer from '~/containers/auth'
-import Head from '~/components/seo/head'
-import useHotkeys from '~/utils/hooks/useHotkeys'
+import Head from 'shared/components/seo/head'
+import useHotkeys from 'shared/utils/hooks/useHotkeys'
 
 const Pecan = ({ Component, pageProps }) => {
   useHotkeys('alt+q+a', () => {
