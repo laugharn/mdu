@@ -1,4 +1,4 @@
-import Title from '~/components/seo/title';
+import Title from 'shared/components/seo/title';
 
 export default () => (
   <div>
