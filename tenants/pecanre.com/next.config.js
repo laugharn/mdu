@@ -31,6 +31,29 @@ const config = {
   webpack(config, options) {
     config.resolve.alias['~'] = path.join(__dirname, '')
 
+    if (options.dev) {
+      config.module.rules.push({
+        test: /\.(jsx?)$/,
+        loader: 'eslint-loader',
+        exclude: [
+          path.resolve(__dirname, '../../node_modules/'),
+          '/node_modules/',
+          '/.next/',
+        ],
+        enforce: 'pre',
+      })
+
+      const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+
+      config.plugins.push(
+        new BundleAnalyzerPlugin({
+          analyzerMode: 'server',
+          analyzerPort: options.isServer ? 8888 : 8889,
+          openAnalyzer: true,
+        }),
+      )
+    }
+
     return config
   },
 }
