@@ -13,6 +13,7 @@ const config = {
   dev: process.env.NODE_ENV !== 'production',
   env: {
     BRANCH: process.env.NOW_GITHUB_COMMIT_REF,
+    SHA: process.env.NOW_GITHUB_COMMIT_SHA,
     SITE_TITLE: 'Pecan Real Estate'
   },
   purgeCss: {
