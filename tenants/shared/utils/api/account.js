@@ -7,7 +7,7 @@ const instance = axios.create({
       : 'https://dev--account.bhsvcs.com',
 })
 
-export const login = async data => {
+export const loginWithPassword = async data => {
   let userObj = await instance
     .post('/loginWithPassword', data)
     .then(response => response.data)
@@ -15,7 +15,7 @@ export const login = async data => {
   return userObj
 }
 
-export const signup = async data => {
+export const signupWithPassword = async data => {
   let userObj = await instance
     .post('/signupWithPassword', data)
     .then(response => response.data)
@@ -24,6 +24,6 @@ export const signup = async data => {
 }
 
 export default {
-  login,
-  signup,
+  loginWithPassword,
+  signupWithPassword,
 }
