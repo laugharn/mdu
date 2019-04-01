@@ -23,8 +23,6 @@ export const updateUser = async (data, token) => {
     .patch('/me', data)
     .then(response => response.data)
 
-  console.log(userObj)
-
   return userObj
 }
 

@@ -1,4 +1,5 @@
 import { get } from 'shared/utils/api/markets'
+import { Input, Select } from 'shared/components/form'
 import { signupWithPassword } from 'shared/utils/api/account'
 import Title from 'shared/components/seo/title'
 import { updateUser } from 'shared/utils/api/user'
@@ -14,7 +15,7 @@ export default () => {
 
   const { handleChange, handleSubmit, submitting, values } = useForm({
     defaultValues: {
-      brokerageName: null,
+      agentBrokerageName: null,
       defaultMarketId: null,
       email: null,
       firstName: null,
@@ -130,54 +131,34 @@ export default () => {
                 Qualify to Tour
               </div>
               <form className="flex flex-wrap" onSubmit={handleSubmit}>
-                <div className="p-2 relative w-full">
-                  <select
-                    className="appearance-none block border p-2 rounded w-full"
+                <div className="p-2 w-full">
+                  <Select
                     name="defaultMarketId"
                     onChange={handleChange}
-                  >
-                    <option value={null}>Market of Interest</option>
-                    {markets.map(market => (
-                      <option key={market.id} value={market.id}>
-                        {market.name}
-                      </option>
-                    ))}
-                  </select>
-                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4">
-                    <svg
-                      className="fill-current h-4 w-4"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                    </svg>
-                  </div>
+                    options={[
+                      { title: 'Market of Interest', value: null },
+                      ...markets.map(market => ({
+                        title: market.name,
+                        value: market.id,
+                      })),
+                    ]}
+                  />
                 </div>
-                <div className="p-2 relative w-full">
-                  <select
-                    className="appearance-none block border p-2 rounded w-full"
+                <div className="p-2 w-full">
+                  <Select
                     name="type"
                     onChange={handleChange}
-                  >
-                    <option value={null}>Agent or Buyer?</option>
-                    <option value="Agent">Agent</option>
-                    <option value="Buyer">Buyer</option>
-                  </select>
-                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4">
-                    <svg
-                      className="fill-current h-4 w-4"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 20 20"
-                    >
-                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                    </svg>
-                  </div>
+                    options={[
+                      { title: 'Agent or Buyer?', value: null },
+                      { title: 'Agent', value: 'Agent' },
+                      { title: 'Buyer', value: 'Buyer' },
+                    ]}
+                  />
                 </div>
                 {values.type === 'Agent' && (
                   <div className="p-2 w-full">
-                    <input
-                      className="block border p-2 rounded w-full"
-                      name="brokerageName"
+                    <Input
+                      name="agentBrokerageName"
                       onChange={handleChange}
                       placeholder="Brokerage Name"
                     />
@@ -185,69 +166,46 @@ export default () => {
                 )}
                 {values.type === 'Buyer' && (
                   <>
-                    <div className="p-2 relative w-full lg:w-1/2">
-                      <select
-                        className="appearance-none block border p-2 rounded w-full"
+                    <div className="p-2 w-full lg:w-1/2">
+                      <Select
                         name="preApproved"
                         onChange={handleChange}
-                      >
-                        <option value={null}>
-                          Have You Been Pre-Approved?
-                        </option>
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                      </select>
-                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4">
-                        <svg
-                          className="fill-current h-4 w-4"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                        </svg>
-                      </div>
+                        options={[
+                          { title: 'Have You Been Pre-Approved', value: null },
+                          { title: 'Yes', value: 'yes' },
+                          { title: 'No', value: 'no' },
+                        ]}
+                      />
                     </div>
-                    <div className="p-2 relative w-full lg:w-1/2">
-                      <select
-                        className="appearance-none block border p-2 rounded w-full"
+                    <div className="p-2 w-full lg:w-1/2">
+                      <Select
                         name="hasAgent"
                         onChange={handleChange}
-                      >
-                        <option value={null}>Working With an Agent?</option>
-                        <option value={true}>Yes</option>
-                        <option value={false}>No</option>
-                      </select>
-                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4">
-                        <svg
-                          className="fill-current h-4 w-4"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                        >
-                          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                        </svg>
-                      </div>
+                        options={[
+                          { title: 'Working with an Agent?', value: null },
+                          { title: 'Yes', value: true },
+                          { title: 'No', value: false },
+                        ]}
+                      />
                     </div>
                   </>
                 )}
                 <div className="p-2 w-full lg:w-1/2">
-                  <input
-                    className="block border p-2 rounded w-full"
+                  <Input
                     name="firstName"
                     onChange={handleChange}
                     placeholder="First Name"
                   />
                 </div>
                 <div className="p-2 w-full lg:w-1/2">
-                  <input
-                    className="block border p-2 rounded w-full"
+                  <Input
                     name="lastName"
                     onChange={handleChange}
                     placeholder="Last Name"
                   />
                 </div>
                 <div className="p-2 w-full lg:w-1/2">
-                  <input
-                    className="block border p-2 rounded w-full"
+                  <Input
                     name="email"
                     onChange={handleChange}
                     placeholder="Email Address"
@@ -255,8 +213,7 @@ export default () => {
                   />
                 </div>
                 <div className="p-2 w-full lg:w-1/2">
-                  <input
-                    className="block border p-2 rounded w-full"
+                  <Input
                     name="phone"
                     onChange={handlePhoneChange}
                     placeholder="Phone"
