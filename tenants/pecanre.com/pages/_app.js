@@ -13,12 +13,12 @@ const Pecan = ({ Component, pageProps }) => {
   })
 
   return (
-    <Container>
-      <Head />
-      <AccountContainer.Provider>
+    <AccountContainer.Provider>
+      <Container>
+        <Head />
         <Component {...pageProps} />
-      </AccountContainer.Provider>
-    </Container>
+      </Container>
+    </AccountContainer.Provider>
   )
 }
 

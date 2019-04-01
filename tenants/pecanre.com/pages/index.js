@@ -1,16 +1,15 @@
-import AccountContainer from '~/containers/account'
 import { get } from 'shared/utils/api/markets'
+import { signupWithPassword } from 'shared/utils/api/account'
 import Title from 'shared/components/seo/title'
-import { useContext, useEffect, useState } from 'react'
+import { updateUser } from 'shared/utils/api/user'
+import { useEffect, useState } from 'react'
 import useForm from 'shared/utils/hooks/useForm'
 
 const splitAt = index => x => [x.slice(0, index), x.slice(index)]
 
 export default () => {
   const [markets, setMarkets] = useState([])
-  const { signupWithPassword, token, updateUser } = useContext(
-    AccountContainer.Context,
-  )
+
   const [qualified, setQualified] = useState(false)
 
   const { handleChange, handleSubmit, submitting, values } = useForm({
@@ -21,8 +20,6 @@ export default () => {
       firstName: null,
       hasAgent: null,
       lastName: null,
-      leadSource: 'Real Estate Agent / MLS',
-      password: 'Passw0rd',
       phone: null,
       preApproved: null,
       type: null,
@@ -40,27 +37,33 @@ export default () => {
       lastName,
       password,
       phone,
+      preApproved,
       type,
     } = values
 
     try {
-      await signupWithPassword({
+      const { token, user } = await signupWithPassword({
         email,
         marketOfInterest: defaultMarketId,
         originationSource: 'Pecan RE Self-Qual',
-        password,
+        password: 'Passw0rd',
       })
 
-      await updateUser({
-        agentBrokerageName,
-        email,
-        firstName,
-        hasAgent,
-        homeToursUnlocked: true,
-        lastName,
-        phone,
-        type,
-      })
+      const updatedUser = await updateUser(
+        {
+          agentBrokerageName,
+          email,
+          firstName,
+          hasAgent,
+          homeToursUnlocked: true,
+          lastName,
+          leadSource: 'Real Estate Agent / MLS',
+          phone,
+          preApproved,
+          type,
+        },
+        token.accessToken,
+      )
 
       setQualified(true)
     } catch (error) {}
@@ -113,8 +116,8 @@ export default () => {
   return (
     <>
       <Title title="Qualify Now" />
-      <div className="bg-gray-500 flex min-h-screen p-4 w-full">
-        <div className="bg-white border m-auto p-2 rounded w-full lg:w-1/2">
+      <div className="bg-gray-300 flex min-h-screen p-4 w-full">
+        <div className="bg-white border shadow-xl m-auto p-2 rounded w-full lg:w-1/2">
           {submitting && <Submitting />}
           {qualified && !submitting && (
             <div className="font-serif p-2 text-3xl text-center w-full">
@@ -262,7 +265,10 @@ export default () => {
                 </div>
                 <div className="p-2 w-full">
                   <button
-                    className="bg-orange-500 hover:bg-orange-700 block p-2 rounded text-white w-full"
+                    className={`bg-orange-500 hover:bg-orange-700 block p-2 rounded text-white w-full ${
+                      !Boolean(values.phone) ? 'disabled' : ''
+                    }`}
+                    disabled={!Boolean(values.phone)}
                     type="submit"
                   >
                     Get Started

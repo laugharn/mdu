@@ -7,6 +7,8 @@ const instance = axios.create({
       ? 'https://prod--markets.bhsvcs.com'
       : Cookies.get('api')
       ? `https://${Cookies.get('api')}--markets.bhsvcs.com`
+      : process.env.NODE_ENV !== 'production'
+      ? 'http://localhost:3503'
       : 'https://dev--markets.bhsvcs.com',
 })
 

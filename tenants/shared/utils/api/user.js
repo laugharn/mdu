@@ -7,12 +7,14 @@ const instance = axios.create({
       ? 'https://prod--users.bhsvcs.com'
       : Cookies.get('api')
       ? `https://${Cookies.get('api')}--users.bhsvcs.com`
+      : process.env.NODE_ENV !== 'production'
+      ? 'http://localhost:3509'
       : 'https://dev--users.bhsvcs.com',
 })
 
 export const updateUser = async (data, token) => {
-  instance.interceptors.request.use(function(config) {
-    config.headers.Authorization = `Bearer ${token}`
+  instance.interceptors.request.use(config => {
+    config.headers.Token = `${token}`
 
     return config
   })

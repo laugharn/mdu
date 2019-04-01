@@ -29,3 +29,8 @@ body {
   @apply .font-sans;
   @apply .text-black;
 }
+
+.disabled {
+  @apply .cursor-not-allowed;
+  @apply .opacity-50;
+}

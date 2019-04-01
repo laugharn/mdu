@@ -18,21 +18,16 @@ const useAuth = () => {
   const signupWithPassword = async data => {
     let response = await accountApi.signupWithPassword(data)
 
-    await setToken(response.token)
-    await setUser(response.user)
+    setToken(response.token)
+    setUser(response.user)
 
     return response
   }
 
   const updateUser = async data => {
-    alert(JSON.stringify(data))
+    await userApi.updateUser(data, token.accessToken)
 
     return true
-    // let response = await userApi.updateUser(data, token.accessToken)
-
-    // await setUser(response.user)
-
-    // return response
   }
 
   return { logout, signupWithPassword, token, updateUser, user }
