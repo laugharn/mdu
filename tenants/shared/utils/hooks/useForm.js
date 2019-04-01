@@ -1,16 +1,14 @@
 import cloneDeep from 'lodash/cloneDeep'
 import set from 'lodash/set'
 import { useEffect, useState } from 'react'
-import validate from 'validate.js'
 
-export default ({ constraints = {}, defaultValues = {}, onSubmit }) => {
+export default ({ defaultValues = {}, onSubmit, rules = null }) => {
+  const [error, setError] = useState(null)
   const [submitting, setSubmitting] = useState(false)
-  const [validation, setValidation] = useState(null)
+  const [validationErrors, setValidationErrors] = useState([])
   const [values, setValues] = useState(defaultValues)
 
-  useEffect(() => {
-    setValidation(validate(values, constraints) || null)
-  }, [constraints, values])
+  useEffect(() => {}, [rules, values])
 
   const handleChange = event => {
     event.persist()
@@ -26,17 +24,22 @@ export default ({ constraints = {}, defaultValues = {}, onSubmit }) => {
 
     if (event) event.preventDefault()
 
-    await onSubmit()
+    try {
+      await onSubmit()
+    } catch (caughtError) {
+      setError(caughtError.response)
+    }
 
     setSubmitting(false)
   }
 
   return {
+    error,
     handleChange,
     handleSubmit,
     setValues,
     submitting,
-    validation,
+    validationErrors,
     values,
   }
 }
