@@ -79,7 +79,7 @@ export default () => {
     <>
       <Title title="Qualify Now" />
       <div className="bg-gray-500 flex min-h-screen p-4 w-full">
-        <div className="bg-white border m-auto p-2 rounded w-1/2">
+        <div className="bg-white border m-auto p-2 rounded w-full lg:w-1/2">
           {qualified && (
             <div className="font-serif p-2 text-3xl text-center w-full">
               Congratulations, you're qualified!
@@ -91,39 +91,51 @@ export default () => {
                 Qualify to Tour
               </div>
               <form className="flex flex-wrap" onSubmit={handleSubmit}>
-                <div className="w-full p-2">
-                  <label className="block pb-1 text-gray-500 w-full">
-                    Market of Interest
-                  </label>
+                <div className="p-2 relative w-full">
                   <select
                     className="appearance-none block border p-2 rounded w-full"
                     name="marketOfInterest"
                     onChange={handleChange}
                   >
-                    <option value={null} />
+                    <option value={null}>Market of Interest</option>
                     {markets.map(market => (
                       <option key={market.id} value={market.id}>
                         {market.name}
                       </option>
                     ))}
                   </select>
+                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4">
+                    <svg
+                      className="fill-current h-4 w-4"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                  </div>
                 </div>
-                <div className="w-full p-2">
-                  <label className="block pb-1 text-gray-500 w-full">
-                    Agent or Buyer?
-                  </label>
+                <div className="p-2 relative w-full">
                   <select
                     className="appearance-none block border p-2 rounded w-full"
                     name="type"
                     onChange={handleChange}
                   >
-                    <option value={null} />
+                    <option value={null}>Agent or Buyer?</option>
                     <option value="Agent">Agent</option>
                     <option value="Buyer">Buyer</option>
                   </select>
+                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4">
+                    <svg
+                      className="fill-current h-4 w-4"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 20 20"
+                    >
+                      <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                  </div>
                 </div>
                 {values.type === 'Agent' && (
-                  <div className="w-full p-2">
+                  <div className="p-2 w-full">
                     <input
                       className="block border p-2 rounded w-full"
                       name="brokerageName"
@@ -134,37 +146,51 @@ export default () => {
                 )}
                 {values.type === 'Buyer' && (
                   <>
-                    <div className="w-1/2 p-2">
-                      <label className="block pb-1 text-gray-500 w-full">
-                        Have You Been Pre-Approved?
-                      </label>
+                    <div className="p-2 relative w-full lg:w-1/2">
                       <select
                         className="appearance-none block border p-2 rounded w-full"
                         name="preApproved"
                         onChange={handleChange}
                       >
-                        <option value={null} />
+                        <option value={null}>
+                          Have You Been Pre-Approved?
+                        </option>
                         <option value="yes">Yes</option>
                         <option value="no">No</option>
                       </select>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4">
+                        <svg
+                          className="fill-current h-4 w-4"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                        </svg>
+                      </div>
                     </div>
-                    <div className="w-1/2 p-2">
-                      <label className="block pb-1 text-gray-500 w-full">
-                        Working with an Agent?
-                      </label>
+                    <div className="p-2 relative w-full lg:w-1/2">
                       <select
                         className="appearance-none block border p-2 rounded w-full"
                         name="hasAgent"
                         onChange={handleChange}
                       >
-                        <option value={null} />
+                        <option value={null}>Working With an Agent?</option>
                         <option value={true}>Yes</option>
                         <option value={false}>No</option>
                       </select>
+                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4">
+                        <svg
+                          className="fill-current h-4 w-4"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                        >
+                          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                        </svg>
+                      </div>
                     </div>
                   </>
                 )}
-                <div className="w-1/2 p-2">
+                <div className="p-2 w-full lg:w-1/2">
                   <input
                     className="block border p-2 rounded w-full"
                     name="firstName"
@@ -172,7 +198,7 @@ export default () => {
                     placeholder="First Name"
                   />
                 </div>
-                <div className="w-1/2 p-2">
+                <div className="p-2 w-full lg:w-1/2">
                   <input
                     className="block border p-2 rounded w-full"
                     name="lastName"
@@ -180,7 +206,7 @@ export default () => {
                     placeholder="Last Name"
                   />
                 </div>
-                <div className="w-1/2 p-2">
+                <div className="p-2 w-full lg:w-1/2">
                   <input
                     className="block border p-2 rounded w-full"
                     name="email"
@@ -189,7 +215,7 @@ export default () => {
                     type="email"
                   />
                 </div>
-                <div className="w-1/2 p-2">
+                <div className="p-2 w-full lg:w-1/2">
                   <input
                     className="block border p-2 rounded w-full"
                     name="phone"
