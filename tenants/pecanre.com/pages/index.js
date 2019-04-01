@@ -8,18 +8,20 @@ const splitAt = index => x => [x.slice(0, index), x.slice(index)]
 
 export default () => {
   const [markets, setMarkets] = useState([])
-  const { signupWithPassword } = useContext(AccountContainer.Context)
+  const { signupWithPassword, updateUser, user } = useContext(
+    AccountContainer.Context,
+  )
   const [qualified, setQualified] = useState(false)
 
   const { handleChange, handleSubmit, submitting, values } = useForm({
     defaultValues: {
       brokerageName: null,
+      defaultMarketId: null,
       email: null,
       firstName: null,
       hasAgent: null,
       lastName: null,
       leadSource: 'Real Estate Agent / MLS',
-      marketOfInterest: null,
       password: 'Passw0rd',
       phone: null,
       preApproved: null,
@@ -29,15 +31,33 @@ export default () => {
   })
 
   async function onSubmit() {
-    const { email, password } = values
+    const {
+      agentBrokerageName,
+      defaultMarketId,
+      email,
+      firstName,
+      hasAgent,
+      lastName,
+      password,
+      phone,
+      type,
+    } = values
 
     try {
       await signupWithPassword({
         email,
+        marketOfInterest: defaultMarketId,
+        originationSource: 'Pecan RE Self-Qual',
         password,
       })
 
-      alert('We will update the user here')
+      await updateUser({
+        email,
+        firstName,
+        lastName,
+        phone,
+        type,
+      })
 
       setQualified(true)
     } catch (error) {}
@@ -75,17 +95,30 @@ export default () => {
     get().then(response => setMarkets(response))
   }, [])
 
+  const Submitting = () => {
+    return (
+      <div className="flex p-2 w-full">
+        <div className="flex m-auto p-2">
+          <div className="bg-orange-500 h-4 mr-4 rounded-full w-4" />
+          <div className="bg-orange-500 h-4 mr-4 rounded-full w-4" />
+          <div className="bg-orange-500 h-4 rounded-full w-4" />
+        </div>
+      </div>
+    )
+  }
+
   return (
     <>
       <Title title="Qualify Now" />
       <div className="bg-gray-500 flex min-h-screen p-4 w-full">
         <div className="bg-white border m-auto p-2 rounded w-full lg:w-1/2">
-          {qualified && (
+          {submitting && <Submitting />}
+          {qualified && !submitting && (
             <div className="font-serif p-2 text-3xl text-center w-full">
               Congratulations, you're qualified!
             </div>
           )}
-          {!qualified && (
+          {!qualified && !submitting && (
             <>
               <div className="font-serif p-2 text-3xl text-center w-full">
                 Qualify to Tour
@@ -94,7 +127,7 @@ export default () => {
                 <div className="p-2 relative w-full">
                   <select
                     className="appearance-none block border p-2 rounded w-full"
-                    name="marketOfInterest"
+                    name="defaultMarketId"
                     onChange={handleChange}
                   >
                     <option value={null}>Market of Interest</option>
@@ -227,7 +260,6 @@ export default () => {
                 <div className="p-2 w-full">
                   <button
                     className="bg-orange-500 hover:bg-orange-700 block p-2 rounded text-white w-full"
-                    disabled={submitting}
                     type="submit"
                   >
                     Get Started

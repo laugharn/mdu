@@ -4,20 +4,28 @@ import Cookies from 'js-cookie'
 const instance = axios.create({
   baseURL:
     process.env.BRANCH === 'master'
-      ? 'https://prod--user.bhsvcs.com'
+      ? 'https://prod--users.bhsvcs.com'
       : Cookies.get('api')
-      ? `https://${Cookies.get('api')}--user.bhsvcs.com`
-      : 'https://dev--user.bhsvcs.com',
+      ? `https://${Cookies.get('api')}--users.bhsvcs.com`
+      : 'https://dev--users.bhsvcs.com',
 })
 
-export const update = async data => {
+export const updateUser = async (data, token) => {
+  instance.interceptors.request.use(function(config) {
+    config.headers.Authorization = `Bearer ${token}`
+
+    return config
+  })
+
   let userObj = await instance
-    .post('/signupWithPassword', data)
+    .patch('/me', data)
     .then(response => response.data)
+
+  console.log(userObj)
 
   return userObj
 }
 
 export default {
-  update,
+  updateUser,
 }

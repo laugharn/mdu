@@ -1,7 +1,6 @@
 import accountApi from 'shared/utils/api/account'
 import createContainer from 'constate'
 import userApi from 'shared/utils/api/user'
-import { useState } from 'react'
 import usePersistedState from 'use-persisted-state'
 
 const useAuth = () => {
@@ -11,16 +10,23 @@ const useAuth = () => {
   const [token, setToken] = useTokenState({})
   const [user, setUser] = useUserState({})
 
-  const signupWithPassword = async data => {
-    console.log('signing up with password')
-    let response = await accountApi.signupWithPassword(data)
-    console.log(response)
-
-    setToken(response.token)
-    setUser(response.user)
+  const logout = async () => {
+    setToken({})
+    setUser({})
   }
 
-  return { signupWithPassword, token, user }
+  const signupWithPassword = async data => {
+    let response = await accountApi.signupWithPassword(data)
+
+    await setToken(response.token)
+    await setUser(response.user)
+  }
+
+  const updateUser = async data => {
+    await userApi.updateUser(data, token.accessToken)
+  }
+
+  return { logout, signupWithPassword, token, updateUser, user }
 }
 
 const AuthContainer = createContainer(useAuth)
