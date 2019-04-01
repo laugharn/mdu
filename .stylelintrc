@@ -1,6 +1,10 @@
 {
   "extends": ["stylelint-prettier/recommended"],
+  "plugins": [
+		"stylelint-order",
+	],
   "rules": {
     "block-no-empty": true,
-  }
+    "order/properties-alphabetical-order": true,
+  },
 }

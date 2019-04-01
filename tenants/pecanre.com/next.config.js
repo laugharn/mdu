@@ -43,15 +43,17 @@ const config = {
         enforce: 'pre',
       })
 
-      const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
+      if (process.env.ANALYZE) {
+        const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
 
-      config.plugins.push(
-        new BundleAnalyzerPlugin({
-          analyzerMode: 'server',
-          analyzerPort: options.isServer ? 8888 : 8889,
-          openAnalyzer: true,
-        }),
-      )
+        config.plugins.push(
+          new BundleAnalyzerPlugin({
+            analyzerMode: 'server',
+            analyzerPort: options.isServer ? 8888 : 8889,
+            openAnalyzer: true,
+          }),
+        )
+      }
     }
 
     return config

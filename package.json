@@ -17,6 +17,7 @@
     "prettier": "^1.16.4",
     "stylelint": "^9.10.1",
     "stylelint-config-prettier": "^5.0.0",
+    "stylelint-order": "^2.1.0",
     "stylelint-prettier": "^1.0.6"
   }
 }
