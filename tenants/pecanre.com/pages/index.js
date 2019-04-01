@@ -8,7 +8,7 @@ const splitAt = index => x => [x.slice(0, index), x.slice(index)]
 
 export default () => {
   const [markets, setMarkets] = useState([])
-  const { signupWithPassword, updateUser, user } = useContext(
+  const { signupWithPassword, token, updateUser } = useContext(
     AccountContainer.Context,
   )
   const [qualified, setQualified] = useState(false)
@@ -52,8 +52,11 @@ export default () => {
       })
 
       await updateUser({
+        agentBrokerageName,
         email,
         firstName,
+        hasAgent,
+        homeToursUnlocked: true,
         lastName,
         phone,
         type,
