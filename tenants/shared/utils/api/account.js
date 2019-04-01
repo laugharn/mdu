@@ -1,9 +1,12 @@
 import axios from 'axios'
+import Cookies from 'js-cookie'
 
 const instance = axios.create({
   baseURL:
     process.env.BRANCH === 'master'
       ? 'https://prod--account.bhsvcs.com'
+      : Cookies.get('api')
+      ? `https://${Cookies.get('api')}--account.bhsvcs.com`
       : 'https://dev--account.bhsvcs.com',
 })
 
@@ -24,6 +27,7 @@ export const signupWithPassword = async data => {
 }
 
 export default {
+  instance,
   loginWithPassword,
   signupWithPassword,
 }

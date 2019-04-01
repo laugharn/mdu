@@ -5,6 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "hotkeys-js": "^3.6.2",
+    "js-cookie": "^2.2.0",
     "lodash": "^4.17.11",
     "react": "^16.8.6"
   }
