@@ -9,7 +9,7 @@ const splitAt = index => x => [x.slice(0, index), x.slice(index)]
 
 export default () => {
   const [markets, setMarkets] = useState([])
-  const { qualifyToTour } = useContext(AccountContainer.Context)
+  const { qualifyToTour, user } = useContext(AccountContainer.Context)
 
   const [qualified, setQualified] = useState(false)
 
@@ -32,10 +32,12 @@ export default () => {
     try {
       await qualifyToTour({
         ...values,
+        bungalo: false,
         homeToursUnlocked: true,
         leadSource: 'Real Estate Agent / MLS',
         originationSource: 'Pecan RE Self-Qual',
         password: 'Passw0rd',
+        retailSales: true,
       })
 
       setQualified(true)

@@ -5,8 +5,8 @@ const instance = axios.create({
   baseURL:
     process.env.BRANCH === 'master'
       ? 'https://prod--account.bhsvcs.com'
-      : Cookies.get('api')
-      ? `https://${Cookies.get('api')}--account.bhsvcs.com`
+      : Cookies.get('api_environment')
+      ? `https://${Cookies.get('api_environment')}--account.bhsvcs.com`
       : process.env.NODE_ENV !== 'production'
       ? 'http://localhost:3500'
       : 'https://dev--account.bhsvcs.com',

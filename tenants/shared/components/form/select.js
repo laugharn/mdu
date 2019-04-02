@@ -2,7 +2,7 @@ export default ({ options = [], ...props }) => {
   return (
     <div className="relative w-full">
       <select
-        className="appearance-none block border p-2 rounded w-full"
+        className="appearance-none block border leading-normal p-2 rounded w-full"
         {...props}
       >
         {options.length > 0 &&

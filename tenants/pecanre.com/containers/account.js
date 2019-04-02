@@ -38,9 +38,6 @@ const useAuth = () => {
       response.token.accessToken,
     )
 
-    setToken(response.token)
-    setUser(updatedUser)
-
     return true
   }
 
