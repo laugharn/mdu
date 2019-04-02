@@ -33,5 +33,9 @@ body {
 
 .disabled {
   @apply .cursor-not-allowed;
-  @apply .opacity-50;
+  @apply .opacity-75;
+}
+
+.bg-brown {
+  background-color: #f1e6d5;
 }
