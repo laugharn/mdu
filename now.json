@@ -5,6 +5,10 @@
   "regions": ["iad1"],
   "routes": [
     {
+      "src": "/robots.txt",
+      "dest": "tenants/pecanre.com/static/robots.txt"
+    },
+    {
       "src": "/(.*)",
       "dest": "tenants/pecanre.com/$1"
     },

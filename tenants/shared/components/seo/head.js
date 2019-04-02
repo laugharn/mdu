@@ -5,7 +5,6 @@ import Title from './title'
 export default ({ children }) => (
   <Head>
     <meta charSet="utf-8" />
-    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     <meta name="sha" content={process.env.SHA} />
 
     <Robots />
