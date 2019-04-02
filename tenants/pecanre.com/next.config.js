@@ -26,6 +26,7 @@ const config = {
     ],
     whitelist: ['body', 'html'],
   },
+  purgeCssPaths: ['pages/**/*', 'components/**/*', '../shared/components/**/*'],
   target: 'serverless',
   transpileModules: ['shared'],
   webpack(config, options) {
