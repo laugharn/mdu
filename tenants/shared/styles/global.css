@@ -17,6 +17,20 @@
   src: url('../fonts/Graphik-Medium-Web.woff');
 }
 
+@font-face {
+  font-family: 'Lyon';
+  font-stretch: normal;
+  font-style: normal;
+  font-weight: normal;
+  src: url('../fonts/LyonDisplay-Medium-Web.woff');
+}
+
 body {
   @apply .font-sans;
+  @apply .text-black;
+}
+
+.disabled {
+  @apply .cursor-not-allowed;
+  @apply .opacity-50;
 }

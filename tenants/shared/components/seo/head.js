@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import Robots from './robots'
 import Title from './title'
 
 export default ({ children }) => (
@@ -7,10 +8,12 @@ export default ({ children }) => (
     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     <meta name="sha" content={process.env.SHA} />
 
+    <Robots />
+
     <Title />
 
     <link
-      href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAG0lEQVR42mP8v3//fwYKAOOoAaMGjBowXAwAAPQRN9FruvVPAAAAAElFTkSuQmCC"
+      href="data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQEAYAAABPYyMiAAAABmJLR0T///////8JWPfcAAAACXBIWXMAAABIAAAASABGyWs+AAAAF0lEQVRIx2NgGAWjYBSMglEwCkbBSAcACBAAAeaR9cIAAAAASUVORK5CYII="
       rel="icon"
       type="image/x-icon"
     />

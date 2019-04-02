@@ -1,7 +1,7 @@
 import 'shared/styles/global.css'
 
 import App, { Container } from 'next/app'
-import AuthContainer from '~/containers/auth'
+import AccountContainer from '~/containers/account'
 import Head from 'shared/components/seo/head'
 import useHotkeys from 'shared/utils/hooks/useHotkeys'
 
@@ -13,12 +13,12 @@ const Pecan = ({ Component, pageProps }) => {
   })
 
   return (
-    <Container>
-      <Head />
-      <AuthContainer.Provider>
+    <AccountContainer.Provider>
+      <Container>
+        <Head />
         <Component {...pageProps} />
-      </AuthContainer.Provider>
-    </Container>
+      </Container>
+    </AccountContainer.Provider>
   )
 }
 

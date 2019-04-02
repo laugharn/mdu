@@ -1,13 +1,18 @@
 import axios from 'axios'
+import Cookies from 'js-cookie'
 
 const instance = axios.create({
   baseURL:
     process.env.BRANCH === 'master'
       ? 'https://prod--account.bhsvcs.com'
+      : Cookies.get('api')
+      ? `https://${Cookies.get('api')}--account.bhsvcs.com`
+      : process.env.NODE_ENV !== 'production'
+      ? 'http://localhost:3500'
       : 'https://dev--account.bhsvcs.com',
 })
 
-export const login = async data => {
+export const loginWithPassword = async data => {
   let userObj = await instance
     .post('/loginWithPassword', data)
     .then(response => response.data)
@@ -15,7 +20,7 @@ export const login = async data => {
   return userObj
 }
 
-export const signup = async data => {
+export const signupWithPassword = async data => {
   let userObj = await instance
     .post('/signupWithPassword', data)
     .then(response => response.data)
@@ -24,6 +29,7 @@ export const signup = async data => {
 }
 
 export default {
-  login,
-  signup,
+  instance,
+  loginWithPassword,
+  signupWithPassword,
 }
