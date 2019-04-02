@@ -9,7 +9,7 @@ const splitAt = index => x => [x.slice(0, index), x.slice(index)]
 
 export default () => {
   const [markets, setMarkets] = useState([])
-  const { qualifyToTour } = useContext(AccountContainer.Context)
+  const { error, qualifyToTour } = useContext(AccountContainer.Context)
 
   const [qualified, setQualified] = useState(false)
 
@@ -76,6 +76,33 @@ export default () => {
     get().then(response => setMarkets(response))
   }, [])
 
+  const Error = () => {
+    return (
+      <div className="p-2 w-full">
+        <div className="p-2 w-full">
+          <img
+            className="mx-auto"
+            src="/static/img/icon-error@2x.png"
+            width={92}
+          />
+        </div>
+        <div className="font-serif p-2 text-center text-3xl">Oops...</div>
+        <div className="pb-2 px-2 text-center text-gray-500 w-full">
+          Something went wrong. Give us a call at <strong>281-330-8004</strong>{' '}
+          during business hours and we'll get you access.
+        </div>
+        <div className="px-2 py-8 w-full">
+          <a
+            className={`bg-black hover:bg-gray-900 block p-2 rounded text-center text-white w-full`}
+            href="tel://2813308004"
+          >
+            Contact Us
+          </a>
+        </div>
+      </div>
+    )
+  }
+
   const Submitting = () => {
     return (
       <div className="flex p-2 w-full">
@@ -92,13 +119,14 @@ export default () => {
     <>
       <Title title="Qualify Now" />
       <div className="m-auto px-2 py-8 max-w-xl">
+        {error && <Error />}
         {submitting && <Submitting />}
         {qualified && !submitting && (
           <div className="font-serif p-2 text-3xl text-center w-full">
             Congratulations, you're qualified!
           </div>
         )}
-        {!qualified && !submitting && (
+        {!error && !qualified && !submitting && (
           <>
             <div className="p-2 w-full">
               <img

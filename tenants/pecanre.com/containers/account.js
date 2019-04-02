@@ -2,11 +2,13 @@ import accountApi from 'shared/utils/api/account'
 import createContainer from 'constate'
 import userApi from 'shared/utils/api/user'
 import usePersistedState from 'use-persisted-state'
+import { useState } from 'react'
 
 const useAuth = () => {
   const useTokenState = usePersistedState('token')
   const useUserState = usePersistedState('user')
 
+  const [error, setError] = useState(false)
   const [token, setToken] = useTokenState({})
   const [user, setUser] = useUserState({})
 
@@ -41,7 +43,7 @@ const useAuth = () => {
     return true
   }
 
-  return { logout, qualifyToTour, token, user }
+  return { error, logout, qualifyToTour, token, user }
 }
 
 const AuthContainer = createContainer(useAuth)
