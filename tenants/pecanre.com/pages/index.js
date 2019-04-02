@@ -83,7 +83,7 @@ export default () => {
           <img
             className="mx-auto"
             src="/static/img/icon-error@2x.png"
-            width={92}
+            width={100}
           />
         </div>
         <div className="font-serif p-2 text-center text-3xl">Oops...</div>
@@ -98,6 +98,37 @@ export default () => {
           >
             Contact Us
           </a>
+        </div>
+      </div>
+    )
+  }
+
+  const Qualified = ({ phone }) => {
+    return (
+      <div className="p-2 w-full">
+        <div className="p-2 w-full">
+          <img
+            className="mx-auto"
+            src="/static/img/icon-success@2x.png"
+            width={100}
+          />
+        </div>
+        <div className="font-serif p-2 text-center text-3xl">
+          And you're in!
+        </div>
+        <div className="pb-6 px-2 text-center text-gray-500 w-full">
+          You can tour anytime between 8am-8pm, 7 days a week.
+        </div>
+        <div className="p-2">
+          <div className="bg-gray-200 px-16 py-12 rounded text-center">
+            <img
+              className="mb-4 mx-auto"
+              src="/static/img/icon-text@2x.png"
+              width={40}
+            />
+            We've sent a text to <strong>{phone}</strong> with instructions to
+            tour.
+          </div>
         </div>
       </div>
     )
@@ -121,11 +152,7 @@ export default () => {
       <div className="m-auto px-2 py-8 max-w-xl">
         {error && <Error />}
         {submitting && <Submitting />}
-        {qualified && !submitting && (
-          <div className="font-serif p-2 text-3xl text-center w-full">
-            Congratulations, you're qualified!
-          </div>
-        )}
+        {qualified && !submitting && <Qualified phone={values.phone} />}
         {!error && !qualified && !submitting && (
           <>
             <div className="p-2 w-full">

@@ -24,7 +24,7 @@ export default () => {
   }
 
   return (
-    <div className="bg-white border-b fixed flex p-2 w-full z-50">
+    <div className="bg-white border-b fixed flex p-2 top-0 w-full z-50">
       <div className="p-2 w-1/2 lg:w-3/4">
         <Select
           onChange={changeSelect}

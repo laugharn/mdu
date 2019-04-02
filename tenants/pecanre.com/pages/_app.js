@@ -22,9 +22,9 @@ const Pecan = ({ Component, pageProps }) => {
   return (
     <AccountContainer.Provider>
       <Container>
+        {showQA && <QA />}
         <LayoutDefault>
           <Head />
-          {showQA && <QA />}
           <Component {...pageProps} />
         </LayoutDefault>
       </Container>
