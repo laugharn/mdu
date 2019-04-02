@@ -28,6 +28,34 @@ export default () => {
     onSubmit,
   })
 
+  const canSubmit =
+    values.type === 'Agent'
+      ? [
+          values.marketOfInterest,
+          values.type,
+          values.agentBrokerageName,
+          values.firstName,
+          values.lastName,
+          values.email,
+          values.phone,
+        ].filter(value => value == null).length === 0
+        ? true
+        : false
+      : values.type === 'Buyer'
+      ? [
+          values.marketOfInterest,
+          values.type,
+          values.preApproved,
+          values.hasAgent,
+          values.firstName,
+          values.lastName,
+          values.email,
+          values.phone,
+        ].filter(value => value == null).length === 0
+        ? true
+        : false
+      : false
+
   async function onSubmit() {
     try {
       await qualifyToTour({
@@ -289,9 +317,9 @@ export default () => {
               <div className="px-2 py-3 w-full">
                 <button
                   className={`bg-black hover:bg-gray-900 block p-2 rounded text-white w-full ${
-                    !Boolean(values.phone) ? 'disabled' : ''
+                    !canSubmit ? 'disabled' : ''
                   }`}
-                  disabled={!Boolean(values.phone)}
+                  disabled={!canSubmit}
                   type="submit"
                 >
                   Submit
