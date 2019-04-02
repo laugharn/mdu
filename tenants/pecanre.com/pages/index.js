@@ -1,22 +1,22 @@
+import AccountContainer from '~/containers/account'
 import { get } from 'shared/utils/api/markets'
 import { Input, Select } from 'shared/components/form'
-import { signupWithPassword } from 'shared/utils/api/account'
 import Title from 'shared/components/seo/title'
-import { updateUser } from 'shared/utils/api/user'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import useForm from 'shared/utils/hooks/useForm'
 
 const splitAt = index => x => [x.slice(0, index), x.slice(index)]
 
 export default () => {
   const [markets, setMarkets] = useState([])
+  const { qualifyToTour } = useContext(AccountContainer.Context)
 
   const [qualified, setQualified] = useState(false)
 
   const { handleChange, handleSubmit, submitting, values } = useForm({
     defaultValues: {
       agentBrokerageName: null,
-      defaultMarketId: null,
+      marketOfInterest: null,
       email: null,
       firstName: null,
       hasAgent: null,
@@ -29,42 +29,14 @@ export default () => {
   })
 
   async function onSubmit() {
-    const {
-      agentBrokerageName,
-      defaultMarketId,
-      email,
-      firstName,
-      hasAgent,
-      lastName,
-      password,
-      phone,
-      preApproved,
-      type,
-    } = values
-
     try {
-      const { token, user } = await signupWithPassword({
-        email,
-        marketOfInterest: defaultMarketId,
+      await qualifyToTour({
+        ...values,
+        homeToursUnlocked: true,
+        leadSource: 'Real Estate Agent / MLS',
         originationSource: 'Pecan RE Self-Qual',
         password: 'Passw0rd',
       })
-
-      const updatedUser = await updateUser(
-        {
-          agentBrokerageName,
-          email,
-          firstName,
-          hasAgent,
-          homeToursUnlocked: true,
-          lastName,
-          leadSource: 'Real Estate Agent / MLS',
-          phone,
-          preApproved,
-          type,
-        },
-        token.accessToken,
-      )
 
       setQualified(true)
     } catch (error) {}
@@ -133,7 +105,7 @@ export default () => {
               <form className="flex flex-wrap" onSubmit={handleSubmit}>
                 <div className="p-2 w-full">
                   <Select
-                    name="defaultMarketId"
+                    name="marketOfInterest"
                     onChange={handleChange}
                     options={[
                       { title: 'Market of Interest', value: null },

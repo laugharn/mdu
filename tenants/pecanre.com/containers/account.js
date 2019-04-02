@@ -15,22 +15,36 @@ const useAuth = () => {
     setUser({})
   }
 
-  const signupWithPassword = async data => {
-    let response = await accountApi.signupWithPassword(data)
+  const qualifyToTour = async data => {
+    const {
+      email,
+      marketOfInterest,
+      originationSource,
+      password,
+      ...values
+    } = data
+    let response = await accountApi.signupWithPassword({
+      email,
+      marketOfInterest,
+      originationSource,
+      password,
+    })
+
+    let updatedUser = await userApi.updateUser(
+      {
+        email,
+        ...values,
+      },
+      response.token.accessToken,
+    )
 
     setToken(response.token)
-    setUser(response.user)
-
-    return response
-  }
-
-  const updateUser = async data => {
-    await userApi.updateUser(data, token.accessToken)
+    setUser(updatedUser)
 
     return true
   }
 
-  return { logout, signupWithPassword, token, updateUser, user }
+  return { logout, qualifyToTour, token, user }
 }
 
 const AuthContainer = createContainer(useAuth)
