@@ -11,3 +11,33 @@ body {
   @apply .cursor-not-allowed;
   @apply .opacity-75;
 }
+
+.markdown h1 {
+  @apply .font-bold;
+  @apply .mb-4;
+  @apply .text-2xl;
+}
+
+.markdown h2 {
+  @apply .font-bold;
+  @apply .mb-4;
+  @apply .text-xl;
+}
+
+.markdown p {
+  @apply .mb-4;
+}
+
+.markdown ol {
+  @apply .mb-4;
+  @apply .pl-4;
+
+  list-style-type: decimal;
+}
+
+.markdown ul {
+  @apply .mb-4;
+  @apply .pl-4;
+
+  list-style-type: disc;
+}

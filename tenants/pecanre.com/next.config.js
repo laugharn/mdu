@@ -1,6 +1,7 @@
 const path = require('path')
 const withCSS = require('@zeit/next-css')
 const withFonts = require('next-fonts')
+const withMDX = require('@zeit/next-mdx')()
 const withPurgeCSS = require('next-purgecss')
 const withTM = require('next-transpile-modules')
 
@@ -62,9 +63,11 @@ const config = {
 }
 
 module.exports = withTM(
-  withFonts(
-    withCSS(
-      process.env.NODE_ENV == 'production' ? withPurgeCSS(config) : config,
+  withMDX(
+    withFonts(
+      withCSS(
+        process.env.NODE_ENV == 'production' ? withPurgeCSS(config) : config,
+      ),
     ),
   ),
 )

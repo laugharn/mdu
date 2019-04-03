@@ -38,7 +38,7 @@ export default () => {
           values.lastName,
           values.email,
           values.phone,
-        ].filter(value => value == null).length === 0
+        ].filter(value => value === null || value === '').length === 0
         ? true
         : false
       : values.type === 'Buyer'
@@ -51,7 +51,7 @@ export default () => {
           values.lastName,
           values.email,
           values.phone,
-        ].filter(value => value == null).length === 0
+        ].filter(value => value === null || value === '').length === 0
         ? true
         : false
       : false
@@ -228,50 +228,54 @@ export default () => {
                   ]}
                 />
               </div>
-              {values.type === 'Agent' && (
-                <div className="px-2 py-3 w-full">
+              <div
+                className={`px-2 py-3 w-full ${
+                  values.type !== 'Agent' ? 'hidden' : ''
+                }`}
+              >
+                <label className="block pb-1 text-gray-700 text-sm w-full">
+                  Brokerage Name
+                </label>
+                <Input
+                  name="agentBrokerageName"
+                  onChange={handleChange}
+                  placeholder="Name of Your Brokerage"
+                />
+              </div>
+              <div
+                className={`flex flex-wrap w-full ${
+                  values.type !== 'Buyer' ? 'hidden' : ''
+                }`}
+              >
+                <div className="px-2 py-3 w-full lg:w-1/2">
                   <label className="block pb-1 text-gray-700 text-sm w-full">
-                    Brokerage Name
+                    Have You Been Pre-Approved?
                   </label>
-                  <Input
-                    name="agentBrokerageName"
+                  <Select
+                    name="preApproved"
                     onChange={handleChange}
-                    placeholder="Name of Your Brokerage"
+                    options={[
+                      { title: '', value: null },
+                      { title: 'Yes', value: 'yes' },
+                      { title: 'No', value: 'no' },
+                    ]}
                   />
                 </div>
-              )}
-              {values.type === 'Buyer' && (
-                <>
-                  <div className="px-2 py-3 w-full lg:w-1/2">
-                    <label className="block pb-1 text-gray-700 text-sm w-full">
-                      Have You Been Pre-Approved?
-                    </label>
-                    <Select
-                      name="preApproved"
-                      onChange={handleChange}
-                      options={[
-                        { title: '', value: null },
-                        { title: 'Yes', value: 'yes' },
-                        { title: 'No', value: 'no' },
-                      ]}
-                    />
-                  </div>
-                  <div className="px-2 py-3 w-full lg:w-1/2">
-                    <label className="block pb-1 text-gray-700 text-sm w-full">
-                      Working with an Agent?
-                    </label>
-                    <Select
-                      name="hasAgent"
-                      onChange={handleChange}
-                      options={[
-                        { title: '', value: null },
-                        { title: 'Yes', value: true },
-                        { title: 'No', value: false },
-                      ]}
-                    />
-                  </div>
-                </>
-              )}
+                <div className="px-2 py-3 w-full lg:w-1/2">
+                  <label className="block pb-1 text-gray-700 text-sm w-full">
+                    Working with an Agent?
+                  </label>
+                  <Select
+                    name="hasAgent"
+                    onChange={handleChange}
+                    options={[
+                      { title: '', value: null },
+                      { title: 'Yes', value: true },
+                      { title: 'No', value: false },
+                    ]}
+                  />
+                </div>
+              </div>
               <div className="px-2 py-3 w-full lg:w-1/2">
                 <label className="block pb-1 text-gray-700 text-sm w-full">
                   First Name

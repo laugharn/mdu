@@ -28,10 +28,26 @@ export default ({ children }) => {
         </div>
         <div className="flex flex-wrap justify-center p-2 text-brown-900 text-center text-xs w-full">
           <div className="p-2">&copy;2019 Pecan Real Estate</div>
-          <div className="p-2">Terms & Conditions</div>
-          <div className="p-2">Privacy Policy</div>
-          <div className="p-2">TREC Info About Brokerage Services</div>
-          <div className="p-2">TREC Consumer Protection Notice</div>
+          <Link href="/terms">
+            <a className="m-2 hover:text-white">Terms & Conditions</a>
+          </Link>
+          <Link href="/privacy">
+            <a className="m-2 hover:text-white">Privacy Policy</a>
+          </Link>
+          <a
+            className="m-2 hover:text-white"
+            href="/static/pdf/broker_services.pdf"
+            target="_blank"
+          >
+            TREC Info About Brokerage Services
+          </a>
+          <a
+            className="m-2 hover:text-white"
+            href="/static/pdf/consumer_protection.pdf"
+            target="_blank"
+          >
+            TREC Consumer Protection Notice
+          </a>
         </div>
       </div>
     </div>
